@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>소개 · 얼마지</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app doc">
+    <header class="top">
+      <a class="brand brand-link" href="index.html">
+        <span class="brand-mark"><i></i>얼마지</span>
+        <small>나라 돈 → 내 나라 돈</small>
+      </a>
+    </header>
+    <article data-lang="ko">
+      <h1>소개</h1>
+      <p class="lead">이 나라 돈이 내 나라 돈으로 얼마인지 바로 보는 환율 사이트입니다.</p>
+      <h2>무엇을 하나요</h2>
+      <p>나라를 고르면 그 나라 화폐와 오늘 환율, 자주 쓰는 금액 10·100·1,000을 보여 줍니다. 오른쪽 내 나라 칸을 바꾸면 다른 나라 돈으로도 계산할 수 있습니다. 어느 쪽이든 숫자를 입력하면 반대편 금액이 같이 바뀝니다.</p>
+      <h2>환율</h2>
+      <p>환율은 ExchangeRate-API에서 가져옵니다. 브라우저에 연결되면 저장된 참고 시세 대신 가져온 시세를 보여 줍니다. 은행 환전 금액, 카드 결제 금액과는 다를 수 있습니다.</p>
+      <h2>여행 가격과 물가 비교</h2>
+      <p>여행 중 자주 보는 가격은 실시간 메뉴 가격이 아닙니다. 음료, 식사, 교통처럼 겹치는 항목을 대략 적어 둔 참고값입니다. 물가가 싼 편인지 비싼 편인지도 이 참고 가격을 환율로 맞춰 나눈 것입니다. 도시와 가게마다 실제 가격은 달라집니다.</p>
+      <h2>누구의 화면으로 보이나요</h2>
+      <p>브라우저 언어와 접속 위치를 보고 내 나라와 화면 언어를 먼저 고릅니다. 오른쪽에서 내 나라는 언제든 바꿀 수 있습니다.</p>
+    </article>
+    <article data-lang="en" hidden>
+      <h1>About</h1>
+      <p class="lead">See how much another country's money is in yours.</p>
+      <h2>What this site does</h2>
+      <p>Pick a country to see its currency, today's rate, and the amounts 10, 100, and 1,000. Change the country on the right to convert into a different currency. Typing in either amount updates the other side.</p>
+      <h2>Exchange rates</h2>
+      <p>Rates come from ExchangeRate-API. When the page can reach the service, it replaces the saved sample rates. The figure can differ from a bank exchange or a card payment.</p>
+      <h2>Travel prices</h2>
+      <p>The travel prices are not live menu prices. They are rough reference amounts for drinks, meals, and transit. The cheaper-or-pricier line compares those same references after converting them with today's rate. Real prices vary by city and shop.</p>
+      <h2>Which country the page starts with</h2>
+      <p>The site looks at the browser language and, if needed, the connection location to choose your country and the screen language. You can change your country on the right at any time.</p>
+    </article>
+    <nav class="legal-nav">
+      <a href="index.html">홈</a>
+      <a href="about.html">소개</a>
+      <a href="contact.html">문의</a>
+      <a href="privacy.html">개인정보처리방침</a>
+    </nav>
+  </div>
+  <script src="site.js"></script>
+  <script src="pages.js"></script>
+</body>
+</html>

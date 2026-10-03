@@ -294,16 +294,6 @@ function setTitle() {
 
 function shell() {
   return `
-    <header class="top">
-      <button class="brand" type="button">
-        <span class="brand-mark"><i></i><span id="brand-name">${esc(t("brand"))}</span></span>
-        <small id="tagline">${esc(t("tagline"))}</small>
-      </button>
-      <p class="today" id="today">오늘 환율</p>
-    </header>
-    <section class="hero">
-      <h1 id="hero-title">${t("headline")}</h1>
-    </section>
     <div class="flow">
       <section class="pane pane-from">
         <p class="pane-kicker" id="from-label">${esc(t("fromLabel"))}</p>
@@ -331,14 +321,6 @@ function shell() {
       </section>
     </div>
     <div id="extra"></div>
-    <footer class="footer">
-      <p id="page-footer">${t("footer")}</p>
-      <nav class="legal-nav">
-        <a id="nav-about" href="about.html">${esc(t("navAbout"))}</a>
-        <a id="nav-contact" href="contact.html">${esc(t("navContact"))}</a>
-        <a id="nav-privacy" href="privacy.html">${esc(t("navPrivacy"))}</a>
-      </nav>
-    </footer>
   `;
 }
 
@@ -743,15 +725,8 @@ function applyChrome() {
     if (html) el.innerHTML = value;
     else el.textContent = value;
   };
-  write("brand-name", t("brand"));
-  write("tagline", t("tagline"));
-  write("hero-title", t("headline"), true);
   write("from-label", t("fromLabel"));
   write("home-label", t("homeLabel"));
-  write("page-footer", t("footer"), true);
-  write("nav-about", t("navAbout"));
-  write("nav-contact", t("navContact"));
-  write("nav-privacy", t("navPrivacy"));
   const search = document.getElementById("search");
   const homeSearch = document.getElementById("home-search");
   if (search) {

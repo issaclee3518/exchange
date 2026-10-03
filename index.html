@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <title>얼마지 · 이 나라 돈, 내 나라 돈으로 얼마지?</title>
-  <meta name="description" content="나라나 화폐를 고르면 내 나라 돈으로 얼마인지 보여줍니다. 내 나라는 브라우저 언어로 맞추고, 원하면 다른 나라로 바꿀 수 있어요.">
+  <meta name="description" content="나라를 고르면 그 나라 돈이 내 나라 돈으로 얼마인지 보여줍니다. 여행 가격은 참고값입니다.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23c24530'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='32' fill='white' font-family='sans-serif'%3E₩%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,254 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app" id="app"></div>
+  <div class="app">
+    <header class="top">
+      <button class="brand" type="button">
+        <span class="brand-mark"><i></i>얼마지</span>
+        <small>나라 돈 ↔ 내 나라 돈</small>
+      </button>
+      <p class="today" id="today">오늘 환율</p>
+    </header>
+
+    <section class="hero">
+      <h1>이 나라 돈,<br>내 나라 돈으로 얼마지?</h1>
+    </section>
+
+    <section class="intro">
+      <p>얼마지는 한 나라의 돈을 고르면, 그 돈이 내 나라 돈으로 얼마인지 바로 보여주는 환율 계산기입니다.</p>
+      <p>왼쪽에서 나라 이름이나 화폐를 검색하면 오늘 환율이 나옵니다. 일본을 고르고 내 나라가 한국이면, 엔이 원으로 얼마인지 바로 보입니다. 10, 100, 1,000도 같은 환율로 계산되고, 오른쪽 칸에 내 나라 돈을 입력하면 왼쪽의 외국 금액이 다시 맞춰집니다.</p>
+      <p>여행 시 자주 보는 가격은 공식 물가지수나 가게의 실시간 메뉴가 아닙니다. 커피, 식사, 교통처럼 여행자가 자주 내는 수준을 대략 적어 둔 참고값입니다. 물가가 싼 편인지 비싼 편인지도 이 참고 가격을 환율로 맞춰 비교한 결과입니다.</p>
+    </section>
+
+    <div id="app"></div>
+
+    <section class="country-index">
+      <h2>나라별 환율</h2>
+      <p>나라 이름을 누르면 그 나라 돈으로 계산이 열립니다.</p>
+      <nav class="country-links">
+        <a href="?country=ghana">가나</a>
+        <a href="?country=gabon">가봉</a>
+        <a href="?country=guyana">가이아나</a>
+        <a href="?country=gambia">감비아</a>
+        <a href="?country=guatemala">과테말라</a>
+        <a href="?country=guam">괌</a>
+        <a href="?country=grenada">그레나다</a>
+        <a href="?country=greece">그리스</a>
+        <a href="?country=greenland">그린란드</a>
+        <a href="?country=guinea">기니</a>
+        <a href="?country=guineabissau">기니비사우</a>
+        <a href="?country=namibia">나미비아</a>
+        <a href="?country=nauru">나우루</a>
+        <a href="?country=nigeria">나이지리아</a>
+        <a href="?country=southsudan">남수단</a>
+        <a href="?country=southafrica">남아프리카공화국</a>
+        <a href="?country=netherlands">네덜란드</a>
+        <a href="?country=nepal">네팔</a>
+        <a href="?country=norway">노르웨이</a>
+        <a href="?country=newcaledonia">누벨칼레도니</a>
+        <a href="?country=newzealand">뉴질랜드</a>
+        <a href="?country=niue">니우에</a>
+        <a href="?country=niger">니제르</a>
+        <a href="?country=nicaragua">니카라과</a>
+        <a href="?country=taiwan">대만</a>
+        <a href="?country=denmark">덴마크</a>
+        <a href="?country=dominica">도미니카</a>
+        <a href="?country=dominican">도미니카공화국</a>
+        <a href="?country=germany">독일</a>
+        <a href="?country=timorleste">동티모르</a>
+        <a href="?country=laos">라오스</a>
+        <a href="?country=liberia">라이베리아</a>
+        <a href="?country=latvia">라트비아</a>
+        <a href="?country=russia">러시아</a>
+        <a href="?country=lebanon">레바논</a>
+        <a href="?country=lesotho">레소토</a>
+        <a href="?country=romania">루마니아</a>
+        <a href="?country=luxembourg">룩셈부르크</a>
+        <a href="?country=rwanda">르완다</a>
+        <a href="?country=libya">리비아</a>
+        <a href="?country=lithuania">리투아니아</a>
+        <a href="?country=liechtenstein">리히텐슈타인</a>
+        <a href="?country=madagascar">마다가스카르</a>
+        <a href="?country=marshall">마셜 제도</a>
+        <a href="?country=macau">마카오</a>
+        <a href="?country=malawi">말라위</a>
+        <a href="?country=malaysia">말레이시아</a>
+        <a href="?country=mali">말리</a>
+        <a href="?country=mexico">멕시코</a>
+        <a href="?country=monaco">모나코</a>
+        <a href="?country=morocco">모로코</a>
+        <a href="?country=mauritius">모리셔스</a>
+        <a href="?country=mauritania">모리타니</a>
+        <a href="?country=mozambique">모잠비크</a>
+        <a href="?country=montenegro">몬테네그로</a>
+        <a href="?country=montserrat">몬트세랫</a>
+        <a href="?country=moldova">몰도바</a>
+        <a href="?country=maldives">몰디브</a>
+        <a href="?country=malta">몰타</a>
+        <a href="?country=mongolia">몽골</a>
+        <a href="?country=usa">미국</a>
+        <a href="?country=myanmar">미얀마</a>
+        <a href="?country=micronesia">미크로네시아</a>
+        <a href="?country=vanuatu">바누아투</a>
+        <a href="?country=bahrain">바레인</a>
+        <a href="?country=barbados">바베이도스</a>
+        <a href="?country=vatican">바티칸</a>
+        <a href="?country=bahamas">바하마</a>
+        <a href="?country=bangladesh">방글라데시</a>
+        <a href="?country=benin">베냉</a>
+        <a href="?country=venezuela">베네수엘라</a>
+        <a href="?country=vietnam">베트남</a>
+        <a href="?country=belgium">벨기에</a>
+        <a href="?country=belarus">벨라루스</a>
+        <a href="?country=belize">벨리즈</a>
+        <a href="?country=bosnia">보스니아 헤르체고비나</a>
+        <a href="?country=botswana">보츠와나</a>
+        <a href="?country=bolivia">볼리비아</a>
+        <a href="?country=burundi">부룬디</a>
+        <a href="?country=burkinafaso">부르키나파소</a>
+        <a href="?country=bhutan">부탄</a>
+        <a href="?country=northmacedonia">북마케도니아</a>
+        <a href="?country=northkorea">북한</a>
+        <a href="?country=bulgaria">불가리아</a>
+        <a href="?country=brazil">브라질</a>
+        <a href="?country=brunei">브루나이</a>
+        <a href="?country=samoa">사모아</a>
+        <a href="?country=saudi">사우디아라비아</a>
+        <a href="?country=sanmarino">산마리노</a>
+        <a href="?country=saotome">상투메 프린시페</a>
+        <a href="?country=senegal">세네갈</a>
+        <a href="?country=serbia">세르비아</a>
+        <a href="?country=seychelles">세이셸</a>
+        <a href="?country=stlucia">세인트루시아</a>
+        <a href="?country=stvincent">세인트빈센트 그레나딘</a>
+        <a href="?country=stkitts">세인트키츠 네비스</a>
+        <a href="?country=somalia">소말리아</a>
+        <a href="?country=solomon">솔로몬 제도</a>
+        <a href="?country=sudan">수단</a>
+        <a href="?country=suriname">수리남</a>
+        <a href="?country=srilanka">스리랑카</a>
+        <a href="?country=sweden">스웨덴</a>
+        <a href="?country=switzerland">스위스</a>
+        <a href="?country=spain">스페인</a>
+        <a href="?country=slovakia">슬로바키아</a>
+        <a href="?country=slovenia">슬로베니아</a>
+        <a href="?country=syria">시리아</a>
+        <a href="?country=sierraleone">시에라리온</a>
+        <a href="?country=sintmaarten">신트마르턴</a>
+        <a href="?country=singapore">싱가포르</a>
+        <a href="?country=uae">아랍에미리트</a>
+        <a href="?country=armenia">아르메니아</a>
+        <a href="?country=argentina">아르헨티나</a>
+        <a href="?country=iceland">아이슬란드</a>
+        <a href="?country=haiti">아이티</a>
+        <a href="?country=ireland">아일랜드</a>
+        <a href="?country=azerbaijan">아제르바이잔</a>
+        <a href="?country=afghanistan">아프가니스탄</a>
+        <a href="?country=andorra">안도라</a>
+        <a href="?country=albania">알바니아</a>
+        <a href="?country=algeria">알제리</a>
+        <a href="?country=angola">앙골라</a>
+        <a href="?country=antigua">앤티가 바부다</a>
+        <a href="?country=anguilla">앵귈라</a>
+        <a href="?country=eritrea">에리트레아</a>
+        <a href="?country=eswatini">에스와티니</a>
+        <a href="?country=estonia">에스토니아</a>
+        <a href="?country=ecuador">에콰도르</a>
+        <a href="?country=ethiopia">에티오피아</a>
+        <a href="?country=elsalvador">엘살바도르</a>
+        <a href="?country=uk">영국</a>
+        <a href="?country=yemen">예멘</a>
+        <a href="?country=oman">오만</a>
+        <a href="?country=austria">오스트리아</a>
+        <a href="?country=honduras">온두라스</a>
+        <a href="?country=wallisfutuna">왈리스 푸투나</a>
+        <a href="?country=jordan">요르단</a>
+        <a href="?country=uganda">우간다</a>
+        <a href="?country=uruguay">우루과이</a>
+        <a href="?country=uzbekistan">우즈베키스탄</a>
+        <a href="?country=ukraine">우크라이나</a>
+        <a href="?country=iraq">이라크</a>
+        <a href="?country=iran">이란</a>
+        <a href="?country=israel">이스라엘</a>
+        <a href="?country=egypt">이집트</a>
+        <a href="?country=italy">이탈리아</a>
+        <a href="?country=india">인도</a>
+        <a href="?country=indonesia">인도네시아</a>
+        <a href="?country=japan">일본</a>
+        <a href="?country=jamaica">자메이카</a>
+        <a href="?country=zambia">잠비아</a>
+        <a href="?country=equatorialguinea">적도기니</a>
+        <a href="?country=georgia">조지아</a>
+        <a href="?country=china">중국</a>
+        <a href="?country=centralafricanrepublic">중앙아프리카공화국</a>
+        <a href="?country=djibouti">지부티</a>
+        <a href="?country=zimbabwe">짐바브웨</a>
+        <a href="?country=chad">차드</a>
+        <a href="?country=czech">체코</a>
+        <a href="?country=chile">칠레</a>
+        <a href="?country=cameroon">카메룬</a>
+        <a href="?country=caboverde">카보베르데</a>
+        <a href="?country=kazakhstan">카자흐스탄</a>
+        <a href="?country=qatar">카타르</a>
+        <a href="?country=cambodia">캄보디아</a>
+        <a href="?country=canada">캐나다</a>
+        <a href="?country=kenya">케냐</a>
+        <a href="?country=comoros">코모로</a>
+        <a href="?country=kosovo">코소보</a>
+        <a href="?country=costarica">코스타리카</a>
+        <a href="?country=ivorycoast">코트디부아르</a>
+        <a href="?country=colombia">콜롬비아</a>
+        <a href="?country=congo">콩고</a>
+        <a href="?country=drcongo">콩고민주공화국</a>
+        <a href="?country=cuba">쿠바</a>
+        <a href="?country=kuwait">쿠웨이트</a>
+        <a href="?country=cookislands">쿡 제도</a>
+        <a href="?country=curacao">퀴라소</a>
+        <a href="?country=croatia">크로아티아</a>
+        <a href="?country=kyrgyzstan">키르기스스탄</a>
+        <a href="?country=kiribati">키리바시</a>
+        <a href="?country=cyprus">키프로스</a>
+        <a href="?country=tajikistan">타지키스탄</a>
+        <a href="?country=tanzania">탄자니아</a>
+        <a href="?country=thailand">태국</a>
+        <a href="?country=togo">토고</a>
+        <a href="?country=tokelau">토켈라우</a>
+        <a href="?country=tonga">통가</a>
+        <a href="?country=turkmenistan">투르크메니스탄</a>
+        <a href="?country=tuvalu">투발루</a>
+        <a href="?country=tunisia">튀니지</a>
+        <a href="?country=turkey">튀르키예</a>
+        <a href="?country=trinidad">트리니다드 토바고</a>
+        <a href="?country=panama">파나마</a>
+        <a href="?country=paraguay">파라과이</a>
+        <a href="?country=pakistan">파키스탄</a>
+        <a href="?country=papua">파푸아뉴기니</a>
+        <a href="?country=palau">팔라우</a>
+        <a href="?country=palestine">팔레스타인</a>
+        <a href="?country=faroe">페로 제도</a>
+        <a href="?country=peru">페루</a>
+        <a href="?country=portugal">포르투갈</a>
+        <a href="?country=poland">폴란드</a>
+        <a href="?country=france">프랑스</a>
+        <a href="?country=frenchpolynesia">프랑스령 폴리네시아</a>
+        <a href="?country=fiji">피지</a>
+        <a href="?country=finland">핀란드</a>
+        <a href="?country=philippines">필리핀</a>
+        <a href="?country=korea">한국</a>
+        <a href="?country=australia">호주</a>
+        <a href="?country=hongkong">홍콩</a>
+      </nav>
+    </section>
+
+    <footer class="footer">
+      <p>환율은 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate-API</a>에서 가져옵니다. 은행 환전 금액이나 카드 결제 금액과 다를 수 있습니다.</p>
+      <nav class="legal-nav">
+        <a href="about.html">소개</a>
+        <a href="contact.html">문의</a>
+        <a href="privacy.html">개인정보처리방침</a>
+      </nav>
+    </footer>
+  </div>
   <script src="countries.js"></script>
   <script src="currencies.js"></script>
   <script src="more-countries.js"></script>

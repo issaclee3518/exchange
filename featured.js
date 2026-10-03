@@ -16,6 +16,8 @@ function featuredPageFor(id) {
 }
 
 function featuredIdFromPath() {
+  const fromDom = document.documentElement.dataset.country;
+  if (fromDom && FEATURED_PAGES[fromDom]) return fromDom;
   const file = (location.pathname.split("/").pop() || "").toLowerCase();
   for (const [id, page] of Object.entries(FEATURED_PAGES)) {
     if (page === file) return id;

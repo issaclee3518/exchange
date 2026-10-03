@@ -267,6 +267,9 @@ function readUrl() {
 
 function writeUrl(replace) {
   const pageCountry = typeof featuredIdFromPath === "function" ? featuredIdFromPath() : null;
+
+  // On a dedicated country HTML page: leaving that country means a real navigation.
+  // On the home calculator, keep SPA-style ?country= so search does not blank the inputs.
   if (pageCountry) {
     if (state.countryId && state.countryId !== pageCountry && typeof featuredPageFor === "function" && featuredPageFor(state.countryId)) {
       goToHref(featuredPageFor(state.countryId) + homeQueryString(), replace);
@@ -311,12 +314,12 @@ function writeUrl(replace) {
     return;
   }
 
-  if (state.countryId && typeof featuredPageFor === "function" && featuredPageFor(state.countryId)) {
-    goToHref(featuredPageFor(state.countryId) + homeQueryString(), replace);
-    return;
-  }
-
   const url = new URL(location.href);
+  // Prefer index.html path when rewriting from odd paths, keep current if already home-like.
+  const file = (url.pathname.split("/").pop() || "").toLowerCase();
+  if (file && file !== "index.html" && file.includes(".html")) {
+    url.pathname = url.pathname.replace(/[^/]+$/, "index.html");
+  }
   if (state.countryId) {
     url.searchParams.set("country", state.countryId);
     url.searchParams.delete("currency");

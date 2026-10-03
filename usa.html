@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko" data-country="usa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>미국 달러 환율 · 얼마지</title>
+  <meta name="description" content="미국 달러가 내 나라 돈으로 얼마인지 계산합니다. 팁 문화, 카드 결제, 도시별 물가 감각을 함께 봅니다.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23c24530'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='32' fill='white' font-family='sans-serif'%3E₩%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,650&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="prefetch" href="japan.html" as="document">
+  <link rel="prefetch" href="vietnam.html" as="document">
+  <link rel="prefetch" href="thailand.html" as="document">
+  <link rel="prefetch" href="taiwan.html" as="document">
+  <link rel="prefetch" href="philippines.html" as="document">
+  <link rel="prefetch" href="singapore.html" as="document">
+  <link rel="prefetch" href="hongkong.html" as="document">
+  <link rel="prefetch" href="australia.html" as="document">
+  <link rel="prefetch" href="france.html" as="document">
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <a class="brand brand-link" href="index.html">
+        <span class="brand-mark"><i></i>얼마지</span>
+        <small>나라 돈 ↔ 내 나라 돈</small>
+      </a>
+      <p class="today" id="today">오늘 환율</p>
+    </header>
+
+    <section class="hero">
+      <h1>미국 달러,<br>내 나라 돈으로 얼마지?</h1>
+    </section>
+
+    <article class="country-guide" data-static-guide data-country="usa">
+      <p class="lead">뉴욕과 지방 소도시는 물가가 크게 다릅니다. 그래도 커피·점심·교통비처럼 반복되는 달러 항목을 기준으로 보면 예산이 잡히기 시작합니다.</p>
+      <p>식당·바·택시에서는 음식값과 별도로 팁을 기대하는 경우가 많습니다. 카드 단말기에 팁 비율이 먼저 뜨기도 해서, 메뉴 가격만 보고 예산을 짜면 부족해질 수 있습니다.</p>
+      <p>현금보다 카드가 기본인 상점이 많고, 세금이 가격표에 안 보이다가 계산 때 더해지는 주도 있습니다. ‘표기 가격 ≠ 최종 금액’일 수 있다는 점만 기억하면 됩니다.</p>
+      <p>달러 지폐 단위(1·5·10·20)로 생각하면 잔돈 감각이 빨라집니다. 아래에서 달러와 내 나라 돈을 서로 맞춰 보세요.</p>
+      <p>여행 중 자주 보는 참고 가격도 환율과 같이 보여 드리지만, 도시·가게마다 실제 금액은 달라질 수 있습니다.</p>
+      <p class="fine">미국의 공식 화폐 코드는 USD입니다. 은행 환전·카드 결제 수수료와는 다를 수 있습니다.</p>
+    </article>
+
+    <div id="app"></div>
+
+    <section class="country-index country-index-compact">
+      <h2>다른 여행 환율</h2>
+      <p>자주 찾는 나라는 바로 열리고, 그 외 나라는 홈에서 검색할 수 있습니다.</p>
+      <nav class="country-links">
+        <a href="japan.html">일본</a>
+        <a href="vietnam.html">베트남</a>
+        <a href="thailand.html">태국</a>
+        <a href="usa.html">미국</a>
+        <a href="taiwan.html">대만</a>
+        <a href="philippines.html">필리핀</a>
+        <a href="singapore.html">싱가포르</a>
+        <a href="hongkong.html">홍콩</a>
+        <a href="australia.html">호주</a>
+        <a href="france.html">프랑스</a>
+        <a href="index.html#countries">모든 나라</a>
+      </nav>
+    </section>
+
+    <footer class="footer">
+      <p>환율은 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate-API</a>에서 가져옵니다. 은행 환전 금액이나 카드 결제 금액과 다를 수 있습니다.</p>
+      <nav class="legal-nav">
+        <a href="about.html">소개</a>
+        <a href="contact.html">문의</a>
+        <a href="privacy.html">개인정보처리방침</a>
+      </nav>
+    </footer>
+  </div>
+  <script src="featured.js"></script>
+  <script src="countries.js"></script>
+  <script src="currencies.js"></script>
+  <script src="more-countries.js"></script>
+  <script src="i18n.js"></script>
+  <script src="country-guides.js"></script>
+  <script src="country-guides-more.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

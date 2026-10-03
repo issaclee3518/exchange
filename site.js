@@ -1,5 +1,5 @@
 const SITE = {
   nameKo: "얼마지",
   nameEn: "How much",
-  email: "",
+  email: "issaclee6320@gmail.com",
 };

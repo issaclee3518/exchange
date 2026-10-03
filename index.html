@@ -11,6 +11,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,650&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="prefetch" href="japan.html" as="document">
+  <link rel="prefetch" href="vietnam.html" as="document">
+  <link rel="prefetch" href="thailand.html" as="document">
+  <link rel="prefetch" href="usa.html" as="document">
+  <link rel="prefetch" href="taiwan.html" as="document">
+  <link rel="prefetch" href="philippines.html" as="document">
+  <link rel="prefetch" href="singapore.html" as="document">
+  <link rel="prefetch" href="hongkong.html" as="document">
+  <link rel="prefetch" href="australia.html" as="document">
+  <link rel="prefetch" href="france.html" as="document">
 </head>
 <body>
   <div class="app">
@@ -34,7 +44,24 @@
 
     <div id="app"></div>
 
-    <section class="country-index">
+    <section class="featured-index">
+      <h2>자주 찾는 여행 환율</h2>
+      <p>고유 안내가 있는 나라 페이지입니다. 누르면 바로 열립니다.</p>
+      <nav class="country-links">
+        <a href="japan.html">일본</a>
+        <a href="vietnam.html">베트남</a>
+        <a href="thailand.html">태국</a>
+        <a href="usa.html">미국</a>
+        <a href="taiwan.html">대만</a>
+        <a href="philippines.html">필리핀</a>
+        <a href="singapore.html">싱가포르</a>
+        <a href="hongkong.html">홍콩</a>
+        <a href="australia.html">호주</a>
+        <a href="france.html">프랑스</a>
+      </nav>
+    </section>
+
+    <section class="country-index" id="countries">
       <h2>나라별 환율</h2>
       <p>나라 이름을 누르면 그 나라 돈으로 계산이 열립니다.</p>
       <nav class="country-links">
@@ -62,7 +89,7 @@
         <a href="?country=niue">니우에</a>
         <a href="?country=niger">니제르</a>
         <a href="?country=nicaragua">니카라과</a>
-        <a href="?country=taiwan">대만</a>
+        <a href="taiwan.html">대만</a>
         <a href="?country=denmark">덴마크</a>
         <a href="?country=dominica">도미니카</a>
         <a href="?country=dominican">도미니카공화국</a>
@@ -98,7 +125,7 @@
         <a href="?country=maldives">몰디브</a>
         <a href="?country=malta">몰타</a>
         <a href="?country=mongolia">몽골</a>
-        <a href="?country=usa">미국</a>
+        <a href="usa.html">미국</a>
         <a href="?country=myanmar">미얀마</a>
         <a href="?country=micronesia">미크로네시아</a>
         <a href="?country=vanuatu">바누아투</a>
@@ -109,7 +136,7 @@
         <a href="?country=bangladesh">방글라데시</a>
         <a href="?country=benin">베냉</a>
         <a href="?country=venezuela">베네수엘라</a>
-        <a href="?country=vietnam">베트남</a>
+        <a href="vietnam.html">베트남</a>
         <a href="?country=belgium">벨기에</a>
         <a href="?country=belarus">벨라루스</a>
         <a href="?country=belize">벨리즈</a>
@@ -147,7 +174,7 @@
         <a href="?country=syria">시리아</a>
         <a href="?country=sierraleone">시에라리온</a>
         <a href="?country=sintmaarten">신트마르턴</a>
-        <a href="?country=singapore">싱가포르</a>
+        <a href="singapore.html">싱가포르</a>
         <a href="?country=uae">아랍에미리트</a>
         <a href="?country=armenia">아르메니아</a>
         <a href="?country=argentina">아르헨티나</a>
@@ -186,7 +213,7 @@
         <a href="?country=italy">이탈리아</a>
         <a href="?country=india">인도</a>
         <a href="?country=indonesia">인도네시아</a>
-        <a href="?country=japan">일본</a>
+        <a href="japan.html">일본</a>
         <a href="?country=jamaica">자메이카</a>
         <a href="?country=zambia">잠비아</a>
         <a href="?country=equatorialguinea">적도기니</a>
@@ -222,7 +249,7 @@
         <a href="?country=cyprus">키프로스</a>
         <a href="?country=tajikistan">타지키스탄</a>
         <a href="?country=tanzania">탄자니아</a>
-        <a href="?country=thailand">태국</a>
+        <a href="thailand.html">태국</a>
         <a href="?country=togo">토고</a>
         <a href="?country=tokelau">토켈라우</a>
         <a href="?country=tonga">통가</a>
@@ -241,14 +268,14 @@
         <a href="?country=peru">페루</a>
         <a href="?country=portugal">포르투갈</a>
         <a href="?country=poland">폴란드</a>
-        <a href="?country=france">프랑스</a>
+        <a href="france.html">프랑스</a>
         <a href="?country=frenchpolynesia">프랑스령 폴리네시아</a>
         <a href="?country=fiji">피지</a>
         <a href="?country=finland">핀란드</a>
-        <a href="?country=philippines">필리핀</a>
+        <a href="philippines.html">필리핀</a>
         <a href="?country=korea">한국</a>
-        <a href="?country=australia">호주</a>
-        <a href="?country=hongkong">홍콩</a>
+        <a href="australia.html">호주</a>
+        <a href="hongkong.html">홍콩</a>
       </nav>
     </section>
 
@@ -261,6 +288,7 @@
       </nav>
     </footer>
   </div>
+  <script src="featured.js"></script>
   <script src="countries.js"></script>
   <script src="currencies.js"></script>
   <script src="more-countries.js"></script>

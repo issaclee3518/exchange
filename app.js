@@ -228,10 +228,23 @@ function searchHits(query) {
   return { currencies, countries };
 }
 
+function homeQueryString() {
+  const url = new URL("https://example.invalid/");
+  if (state.homeCountryId) url.searchParams.set("home", state.homeCountryId);
+  else if (state.homeCurrency) url.searchParams.set("homeCurrency", state.homeCurrency);
+  return url.search;
+}
+
+function goToHref(href, replace) {
+  if (replace) location.replace(href);
+  else location.assign(href);
+}
+
 function readUrl() {
   const params = new URLSearchParams(location.search);
-  const country = params.get("country");
-  const currency = params.get("currency");
+  const pageCountry = typeof featuredIdFromPath === "function" ? featuredIdFromPath() : null;
+  const country = pageCountry || params.get("country");
+  const currency = pageCountry ? null : params.get("currency");
   if (country && countryById(country)) {
     state.countryId = country;
     state.currencyCode = null;
@@ -253,6 +266,56 @@ function readUrl() {
 }
 
 function writeUrl(replace) {
+  const pageCountry = typeof featuredIdFromPath === "function" ? featuredIdFromPath() : null;
+  if (pageCountry) {
+    if (state.countryId && state.countryId !== pageCountry && typeof featuredPageFor === "function" && featuredPageFor(state.countryId)) {
+      goToHref(featuredPageFor(state.countryId) + homeQueryString(), replace);
+      return;
+    }
+    if (state.countryId && state.countryId !== pageCountry) {
+      const url = new URL("index.html", location.href);
+      url.searchParams.set("country", state.countryId);
+      if (state.homeCountryId) url.searchParams.set("home", state.homeCountryId);
+      else if (state.homeCurrency) url.searchParams.set("homeCurrency", state.homeCurrency);
+      goToHref(url.pathname + url.search, replace);
+      return;
+    }
+    if (!state.countryId && state.currencyCode) {
+      const url = new URL("index.html", location.href);
+      url.searchParams.set("currency", state.currencyCode);
+      if (state.homeCountryId) url.searchParams.set("home", state.homeCountryId);
+      else if (state.homeCurrency) url.searchParams.set("homeCurrency", state.homeCurrency);
+      goToHref(url.pathname + url.search, replace);
+      return;
+    }
+    if (!state.countryId && !state.currencyCode) {
+      goToHref("index.html" + homeQueryString(), replace);
+      return;
+    }
+    const url = new URL(location.href);
+    url.searchParams.delete("country");
+    url.searchParams.delete("currency");
+    if (state.homeCountryId) {
+      url.searchParams.set("home", state.homeCountryId);
+      url.searchParams.delete("homeCurrency");
+    } else if (state.homeCurrency) {
+      url.searchParams.delete("home");
+      url.searchParams.set("homeCurrency", state.homeCurrency);
+    } else {
+      url.searchParams.delete("home");
+      url.searchParams.delete("homeCurrency");
+    }
+    const next = `${url.pathname}${url.search}`;
+    if (replace) history.replaceState({ id: pageCountry }, "", next);
+    else history.pushState({ id: pageCountry }, "", next);
+    return;
+  }
+
+  if (state.countryId && typeof featuredPageFor === "function" && featuredPageFor(state.countryId)) {
+    goToHref(featuredPageFor(state.countryId) + homeQueryString(), replace);
+    return;
+  }
+
   const url = new URL(location.href);
   if (state.countryId) {
     url.searchParams.set("country", state.countryId);
@@ -493,35 +556,36 @@ function costHTML(source, home) {
   return `<p class="cost ${tone}">${esc(sentence)}</p><p class="fine">${esc(t("costNote"))}</p>`;
 }
 
+function guideParagraphs(guide, korean) {
+  if (!guide) return [];
+  const raw = korean ? guide.ko : guide.en;
+  if (Array.isArray(raw)) return raw.filter(Boolean);
+  if (typeof raw === "string" && raw.trim()) return [raw];
+  return [];
+}
+
+function hasStaticGuide() {
+  return Boolean(document.querySelector("[data-static-guide]"));
+}
+
 function guideHTML(source, home) {
   if (!source || source.isCurrency) return "";
+  if (hasStaticGuide()) {
+    const rate = home ? crossRate(source.code, home.code) : null;
+    if (rate == null || !home) return "";
+    return `<p class="rate-now">${esc(withUnit("1", source))} ≈ ${esc(withUnit(formatRate(rate), home))}</p>`;
+  }
   const guide = typeof GUIDES !== "undefined" ? GUIDES[source.id] : null;
-  const korean = state.lang === "ko";
-  const capital = guide ? (korean ? guide.capitalKo : guide.capitalEn) : "";
-  const fact = guide ? (korean ? guide.ko : guide.en) : "";
+  const paragraphs = guideParagraphs(guide, state.lang === "ko");
   const rate = home ? crossRate(source.code, home.code) : null;
-  const where = capital
-    ? t("guideWhere", {
-      name: placeName(source),
-      capital,
-      currency: currencyName(source.code),
-      code: source.code,
-    })
-    : "";
   const rateLine = rate != null && home
-    ? t("guideRate", {
-      unit: unitName(source),
-      amount: formatRate(rate),
-      homeUnit: unitName(home),
-    })
+    ? `${esc(withUnit("1", source))} ≈ ${esc(withUnit(formatRate(rate), home))}`
     : "";
-  if (!where && !fact && !rateLine) return "";
+  if (!paragraphs.length && !rateLine) return "";
   return `
     <h3>${esc(t("guideTitle", { name: placeName(source) }))}</h3>
-    ${where ? `<p>${esc(where)}</p>` : ""}
-    ${fact ? `<p>${esc(fact)}</p>` : ""}
-    ${rateLine ? `<p>${esc(rateLine)}</p>` : ""}
-    <p>${esc(t("guideSpend"))}</p>
+    ${paragraphs.map((line) => `<p>${esc(line)}</p>`).join("")}
+    ${rateLine ? `<p class="rate-now">${rateLine}</p>` : ""}
   `;
 }
 
@@ -554,15 +618,19 @@ function extraHTML(source, home) {
     </ul>
     <p class="fine">${esc(t("priceNote"))}</p>
   ` : "";
+  const guide = typeof GUIDES !== "undefined" ? GUIDES[source.id] : null;
+  const hasGuide = hasStaticGuide() || guideParagraphs(guide, state.lang === "ko").length > 0;
+  const moneyLine = source.isCurrency
+    ? `<p>${esc(t("currencyItself", { name: currencyName(source.code), code: source.code }))}</p>`
+    : hasGuide
+      ? ""
+      : `<p>${esc(t("officialMoney", { name: placeName(source), currency: currencyName(source.code), code: source.code }))}</p>`;
   if (!currencyUsers && !sharedLine && !priceBlock && source.isCurrency) return "";
   return `
     <section class="story">
       ${guideHTML(source, home)}
-      <h3>${esc(t("currencyQuestion", { name: placeName(source) }))}</h3>
-      <p>${source.isCurrency
-        ? esc(t("currencyItself", { name: currencyName(source.code), code: source.code }))
-        : esc(t("officialMoney", { name: placeName(source), currency: currencyName(source.code), code: source.code }))}
-      </p>
+      ${hasGuide ? "" : `<h3>${esc(t("currencyQuestion", { name: placeName(source) }))}</h3>`}
+      ${moneyLine}
       ${state.lang === "ko" && source.note ? `<p class="note">${esc(source.note)}</p>` : ""}
       ${sharedLine}
       ${currencyUsers}
@@ -1157,10 +1225,19 @@ function boot() {
     selectOnMouseUp = false;
   });
 
-  document.querySelector(".brand").addEventListener("click", () => {
-    search.value = "";
-    if (state.countryId || state.currencyCode || state.query) clearSource(false);
-  });
+  const brand = document.querySelector(".brand");
+  if (brand) {
+    brand.addEventListener("click", (event) => {
+      if (typeof featuredIdFromPath === "function" && featuredIdFromPath()) {
+        if (brand.tagName === "A") return;
+        event.preventDefault();
+        goToHref("index.html" + homeQueryString(), false);
+        return;
+      }
+      search.value = "";
+      if (state.countryId || state.currencyCode || state.query) clearSource(false);
+    });
+  }
 
   window.addEventListener("popstate", () => {
     state.countryId = null;

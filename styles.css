@@ -1,3 +1,7 @@
+@view-transition {
+  navigation: auto;
+}
+
 :root {
   --bg: #efe6d8;
   --card: #fffdf8;
@@ -37,6 +41,17 @@ button { cursor: pointer; }
   width: min(980px, calc(100% - 32px));
   margin: 0 auto;
   padding: 28px 0 64px;
+  view-transition-name: app-shell;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 160ms;
+}
+
+::view-transition-old(app-shell),
+::view-transition-new(app-shell) {
+  animation-duration: 180ms;
 }
 
 .top {
@@ -95,20 +110,47 @@ button { cursor: pointer; }
 }
 
 .intro p,
-.country-index p {
+.country-index p,
+.featured-index p,
+.country-guide p {
   margin: 0 0 14px;
   line-height: 1.75;
   color: #3c372f;
 }
 
+.featured-index,
 .country-index {
   margin-top: 36px;
 }
 
+.featured-index h2,
 .country-index h2 {
   margin: 0 0 8px;
   font-size: 22px;
   letter-spacing: -0.03em;
+}
+
+.country-guide {
+  margin: 8px 0 28px;
+  padding: 22px 22px 8px;
+  background: rgba(255, 253, 248, 0.72);
+  border: 1px solid rgba(229, 218, 203, 0.9);
+  border-radius: 28px;
+}
+
+.country-guide .lead {
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.country-guide .fine,
+.rate-now {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.country-index-compact {
+  margin-top: 28px;
 }
 
 .country-links {

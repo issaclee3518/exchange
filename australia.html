@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko" data-country="australia">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>호주 달러 환율 · 얼마지</title>
+  <meta name="description" content="호주 달러가 내 나라 돈으로 얼마인지 계산합니다. 카드 결제 중심의 일상과 커피·교통 물가 감각을 안내합니다.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23c24530'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='32' fill='white' font-family='sans-serif'%3E₩%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,650&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="prefetch" href="japan.html" as="document">
+  <link rel="prefetch" href="vietnam.html" as="document">
+  <link rel="prefetch" href="thailand.html" as="document">
+  <link rel="prefetch" href="usa.html" as="document">
+  <link rel="prefetch" href="taiwan.html" as="document">
+  <link rel="prefetch" href="philippines.html" as="document">
+  <link rel="prefetch" href="singapore.html" as="document">
+  <link rel="prefetch" href="hongkong.html" as="document">
+  <link rel="prefetch" href="france.html" as="document">
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <a class="brand brand-link" href="index.html">
+        <span class="brand-mark"><i></i>얼마지</span>
+        <small>나라 돈 ↔ 내 나라 돈</small>
+      </a>
+      <p class="today" id="today">오늘 환율</p>
+    </header>
+
+    <section class="hero">
+      <h1>호주 달러,<br>내 나라 돈으로 얼마지?</h1>
+    </section>
+
+    <article class="country-guide" data-static-guide data-country="australia">
+      <p class="lead">시드니·멜버른에서는 커피 한 잔이 물가 이야기의 시작인 경우가 많습니다. 카드 결제가 기본에 가까워, 앱·단말기 금액만 환율로 바꿔도 예산이 그려집니다.</p>
+      <p>현금만 받는 가게는 줄었고, 대중교통도 카드·앱 요금이 흔합니다. 여행 전에 ‘현금 다량’보다 카드 한도와 수수료를 확인하는 편이 실무적입니다.</p>
+      <p>식당 팁은 미국만큼 강하지 않습니다. 서비스가 뛰어날 때 소액을 남기는 식이지, 모든 계산에 높은 비율을 더하진 않아도 됩니다.</p>
+      <p>호주 달러는 미국 달러와 이름이 비슷해도 가치가 다릅니다. ‘달러’라는 단어만 보고 미국 물가와 같다고 느끼면 예산이 어긋날 수 있습니다.</p>
+      <p>아래에서 호주 달러와 내 나라 돈을 양방향으로 계산해 보세요.</p>
+      <p class="fine">호주의 공식 화폐 코드는 AUD입니다. 은행 환전·카드 결제 수수료와는 다를 수 있습니다.</p>
+    </article>
+
+    <div id="app"></div>
+
+    <section class="country-index country-index-compact">
+      <h2>다른 여행 환율</h2>
+      <p>자주 찾는 나라는 바로 열리고, 그 외 나라는 홈에서 검색할 수 있습니다.</p>
+      <nav class="country-links">
+        <a href="japan.html">일본</a>
+        <a href="vietnam.html">베트남</a>
+        <a href="thailand.html">태국</a>
+        <a href="usa.html">미국</a>
+        <a href="taiwan.html">대만</a>
+        <a href="philippines.html">필리핀</a>
+        <a href="singapore.html">싱가포르</a>
+        <a href="hongkong.html">홍콩</a>
+        <a href="australia.html">호주</a>
+        <a href="france.html">프랑스</a>
+        <a href="index.html#countries">모든 나라</a>
+      </nav>
+    </section>
+
+    <footer class="footer">
+      <p>환율은 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate-API</a>에서 가져옵니다. 은행 환전 금액이나 카드 결제 금액과 다를 수 있습니다.</p>
+      <nav class="legal-nav">
+        <a href="about.html">소개</a>
+        <a href="contact.html">문의</a>
+        <a href="privacy.html">개인정보처리방침</a>
+      </nav>
+    </footer>
+  </div>
+  <script src="featured.js"></script>
+  <script src="countries.js"></script>
+  <script src="currencies.js"></script>
+  <script src="more-countries.js"></script>
+  <script src="i18n.js"></script>
+  <script src="country-guides.js"></script>
+  <script src="country-guides-more.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
